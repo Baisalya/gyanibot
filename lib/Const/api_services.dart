@@ -16,7 +16,7 @@ class ApiServices{
     body: jsonEncode({
       "model":"text-davinci-003",
       "prompt":"$mesg",
-      "temprature":0,
+      "temperature":0,
       "max_token":100,
       "top_p":1,
       "frequency_penalty":0.0,
