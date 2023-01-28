@@ -4,6 +4,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class VoiceCommand extends StatefulWidget {
   const VoiceCommand({Key? key}) : super(key: key);
@@ -11,19 +12,19 @@ class VoiceCommand extends StatefulWidget {
   @override
   State<VoiceCommand> createState() => _VoiceCommandState();
 }
-var michint="Hold the mic to ask Questions";
+var Qry="Hold the mic to ask Questions";
+
 bool ispress=false;
 class _VoiceCommandState extends State<VoiceCommand> {
+
+  SpeechToText speechToText=SpeechToText();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         floatingActionButton:
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: [
-
               Padding(
                 padding: const EdgeInsets.only(left: 29,top: 50),
                 child: FloatingActionButton(
@@ -39,6 +40,7 @@ class _VoiceCommandState extends State<VoiceCommand> {
               SizedBox(
                 height: 10,
               ),
+              /*** Voice question button ****/
               AvatarGlow(
                 endRadius:70.0 ,
                 animate: ispress,
@@ -55,7 +57,22 @@ class _VoiceCommandState extends State<VoiceCommand> {
                       repeatPauseDuration:Duration(microseconds:100),
                       showTwoGlows: true,
                       child: GestureDetector(
-                        onTapDown: (details){
+                        onTapDown: (details) async{
+                          if(!ispress){
+                            var available=await speechToText.initialize();
+                            if(available){
+                              setState(() {
+                                ispress=true;
+                                speechToText.listen(
+                                  onResult: ((result) {
+                                    setState(() {
+                                      Qry=result.recognizedWords;
+                                    });
+                                  })
+                                );
+                              });
+                            }
+                          }
                           setState(() {
                             ispress=true;
                           });
@@ -64,6 +81,7 @@ class _VoiceCommandState extends State<VoiceCommand> {
                           setState(() {
                             ispress=false;
                           });
+                          speechToText.stop();
                         },
                         child: Icon(ispress ?
                             Icons.mic : Icons.mic_none_rounded
@@ -77,6 +95,7 @@ class _VoiceCommandState extends State<VoiceCommand> {
               )
             ]
         ),
+      /** App Bar**/
       appBar: AppBar(
         leading: Icon(Icons.sort),
         centerTitle: true,
@@ -90,7 +109,6 @@ class _VoiceCommandState extends State<VoiceCommand> {
           image: const DecorationImage(
             opacity: 192,
             image: NetworkImage('https://e7.pngegg.com/pngimages/498/917/png-clipart-computer-icons-desktop-chatbot-icon-blue-angle.png',),
-
             fit: BoxFit.fill,
           ),
 
