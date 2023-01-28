@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -101,20 +101,25 @@ class _VoiceCommandState extends State<VoiceCommand> {
         centerTitle: true,
         title:const Text("Ask Your Question",style:TextStyle(fontStyle:FontStyle.italic,fontWeight: FontWeight.bold,color:Colors.white ),),
       ),
-      body:Container(
-        padding: EdgeInsets.symmetric(vertical: 30,horizontal: 26),
-        margin: EdgeInsets.only(bottom: 160),
-        decoration: BoxDecoration(
-          color: const Color(0xff7c94b6),
-          image: const DecorationImage(
-            opacity: 192,
-            image: NetworkImage('https://e7.pngegg.com/pngimages/498/917/png-clipart-computer-icons-desktop-chatbot-icon-blue-angle.png',),
-            fit: BoxFit.fill,
+      body:SingleChildScrollView(
+        reverse: true,
+        physics:const BouncingScrollPhysics(),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 30,horizontal: 26),
+          margin: EdgeInsets.only(bottom: 160),
+          decoration: BoxDecoration(
+            color: const Color(0xff7c94b6),
+            image: const DecorationImage(
+              opacity: 192,
+              image: NetworkImage('https://e7.pngegg.com/pngimages/498/917/png-clipart-computer-icons-desktop-chatbot-icon-blue-angle.png',),
+              fit: BoxFit.fill,
+            ),
+
           ),
 
-
         ),
-      )
+      ),
+
     );
   }
 }
