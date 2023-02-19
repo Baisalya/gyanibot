@@ -101,24 +101,39 @@ class _VoiceCommandState extends State<VoiceCommand> {
         centerTitle: true,
         title:const Text("Ask Your Question",style:TextStyle(fontStyle:FontStyle.italic,fontWeight: FontWeight.bold,color:Colors.white ),),
       ),
-      body:SingleChildScrollView(
-        reverse: true,
-        physics:const BouncingScrollPhysics(),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 30,horizontal: 26),
-          margin: EdgeInsets.only(bottom: 160),
-          decoration: BoxDecoration(
-            color: const Color(0xff7c94b6),
-            image: const DecorationImage(
+      body: Container(
+          padding: EdgeInsets.symmetric(vertical: 24,horizontal: 18),
+       //   margin: EdgeInsets.only(bottom: 160),
+        /**  decoration: const BoxDecoration(
+            color: Color(0xff7c94b6),
+            image: DecorationImage(
               opacity: 192,
               image: NetworkImage('https://e7.pngegg.com/pngimages/498/917/png-clipart-computer-icons-desktop-chatbot-icon-blue-angle.png',),
               fit: BoxFit.fill,
             ),
 
-          ),
+          ),**/
+          child:Column(
+            children:[
+              Text(
+                Qry,
+                style:TextStyle(
+                    color:ispress?Colors.black26:Colors.blueAccent,
+                    fontWeight:FontWeight.w200,
+                    fontSize: 25
+                ),
+              ),
+              Expanded(child: Container(
+                decoration:BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(10),
 
+                ),
+                ))
+            ],
+          ),
         ),
-      ),
+
 
     );
   }
