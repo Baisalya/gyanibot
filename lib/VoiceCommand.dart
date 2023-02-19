@@ -123,18 +123,53 @@ class _VoiceCommandState extends State<VoiceCommand> {
                     fontSize: 25
                 ),
               ),
-              Expanded(child: Container(
-                decoration:BoxDecoration(
+              Expanded(
+                  child: Container(
+                    padding:const EdgeInsets.symmetric(horizontal:16,vertical: 10),
+                  decoration:BoxDecoration(
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(10),
-
                 ),
-                ))
+                    child: ListView.builder(
+                      shrinkWrap:true,
+                      itemCount:4,
+                      itemBuilder: (BuildContext context,int index){
+                        return chatbubble();
+                      },
+                    ),
+                ),
+              ),
             ],
           ),
         ),
+    );
+  }
+  /*** for chat show ui  **/
+  Widget chatbubble(){
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:[
+        CircleAvatar(
+          child:Icon(Icons.person_outline,color:Colors.white,),
+        ),
+        SizedBox(width: 10,),
+        Expanded(
+          child: Container(
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            color:Colors.white,
+            borderRadius:BorderRadius.only(topRight:Radius.circular(10),bottomRight:Radius.circular(10)),
+          ),
+          child: Text("hey lala",style:
+            TextStyle(
+              color:Colors.red,
+              fontWeight: FontWeight.w200
+            ),),
 
-
+      ),
+        ),
+    ],
     );
   }
 }
