@@ -1,9 +1,9 @@
 import 'dart:ui';
-
 import 'package:avatar_glow/avatar_glow.dart';
-//import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gyanibot/model/chatmodel.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class VoiceCommand extends StatefulWidget {
@@ -26,7 +26,7 @@ class _VoiceCommandState extends State<VoiceCommand> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 29,top: 50),
+                padding: const EdgeInsets.only(left: 65,top: 20),
                 child: FloatingActionButton(
                   child: Icon(
                       Icons.textsms
@@ -44,7 +44,7 @@ class _VoiceCommandState extends State<VoiceCommand> {
               AvatarGlow(
                 endRadius:70.0 ,
                 animate: ispress,
-                duration:Duration(milliseconds:2000),
+                duration:Duration(milliseconds:3000),
                 glowColor:Colors.blueGrey,
                 repeatPauseDuration:Duration(microseconds:100),
                 showTwoGlows: true,
@@ -134,7 +134,10 @@ class _VoiceCommandState extends State<VoiceCommand> {
                       shrinkWrap:true,
                       itemCount:4,
                       itemBuilder: (BuildContext context,int index){
-                        return chatbubble();
+                        return chatbubble(
+                          chattext:'hey lala!!',
+                          type: ChatType.user
+                        );
                       },
                     ),
                 ),
@@ -145,7 +148,7 @@ class _VoiceCommandState extends State<VoiceCommand> {
     );
   }
   /*** for chat show ui  **/
-  Widget chatbubble(){
+  Widget chatbubble({required chattext,required ChatType type}){
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:[
@@ -161,10 +164,10 @@ class _VoiceCommandState extends State<VoiceCommand> {
             color:Colors.white,
             borderRadius:BorderRadius.only(topRight:Radius.circular(10),bottomRight:Radius.circular(10)),
           ),
-          child: Text("hey lala",style:
-            TextStyle(
-              color:Colors.red,
-              fontWeight: FontWeight.w200
+          child: Text("$chattext",
+            style: TextStyle(
+              color:Colors.blueGrey,
+              fontWeight: FontWeight.bold
             ),),
 
       ),
